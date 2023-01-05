@@ -9,7 +9,7 @@
 
       <ul class="hidden md:flex space-x-6">
         <li><a href="{% url 'patients:household_search' %}">Search</a></li>
-        <li><a href="#">Household</a></li>
+        <li><a href="{% url 'patients:household' %}">Household</a></li>
         <li class="flex relative group">
           <a href="#" class="mr-1">Services</a>
           <i class="fa-solid fa-chevron-down fa-2xs pt-3"></i>
@@ -35,9 +35,23 @@
           </ul>
           <!-- Submenu ends -->
         </li>
-        <li><a href="#">About</a></li>
+        <li><a href="{% url 'patients:household_member' %}">Member</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
+
+      <div
+        class="bg-gray-800 rounded-full py-2 px-4 text-gray-800 flex items-center"
+      >
+        <img
+          src="{% static 'images/profile.svg' %}"
+          alt="Profile Image"
+          class="w-8 h-8 rounded-full mr-5"
+        />
+        <div>
+          <div class="font-bold">John Doe</div>
+          <div class="text-xs">johndoe@example.com</div>
+        </div>
+      </div>
 
       <a
         href="#"

@@ -53,8 +53,14 @@ def household_serach(request):
     context={"name":"ilnuga gisa dnaiel","patients":lst}
     return render(request, 'patients/household_search.html',context)
 
-def household(request,pk):
+def household(request):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # context = {'latest_question_list': latest_question_list}
-    context={"name":"ilnuga gisa dnaiel","household":pk}
+    context={"name":"ilnuga gisa dnaiel","household":""}
     return render(request,'patients/household.html',context)
+
+def household_member(request):
+    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    # context = {'latest_question_list': latest_question_list}
+    context={"name":"ilnuga gisa dnaiel","household":""}
+    return render(request,'patients/household_member.html',context)

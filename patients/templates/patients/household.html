@@ -1,81 +1,239 @@
 {% extends 'base.html' %} {% block content %}
 
 <section>
-  <div class="flex justify-center">
-    <div class="overflow-x-auto">
-      <table class="min-w-full divide-y text-sm">
-        <thead class="bg-gray-100">
-          <tr>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              Names
-            </th>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              Sex
-            </th>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              ID
-            </th>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              Date
-            </th>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              Date
-            </th>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              Insurence Status
-            </th>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              Actions
-            </th>
-          </tr>
-        </thead>
+  {% comment %} -------------------------------- {% endcomment %}
+  <div class="bg-white">
+    <nav class="tabs flex flex-col sm:flex-row justify-center">
+      <button
+        data-target="panel-1"
+        class="tab active py-4 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 font-medium border-blue-500"
+      >
+        House Hold
+      </button>
+      <button
+        data-target="panel-2"
+        class="tab ext-gray-600 py-4 px-6 block text-blue-500 hover:text-blue-500 focus:outline-none"
+      >
+        House
+      </button>
+    </nav>
+  </div>
 
-        <tbody class="divide-y divide-gray-200">
-          <tr>
-            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              John Doe Damalover
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              1992313452445245
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              24/05/1995
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-900">
-              <span class="bg-green-200 rounded-lg p-1">
-                Allowed to be treated
-              </span>
-            </td>
-            <td class="whitespace-nowrap py-2 text-gray-900 rounded-lg">
-              <div class="flex justify-around">
-                <div class="border">
-                  <i class="fa-solid fa-eye"></i>
-                </div>
-                <div class="border">
-                  <i class="fa-solid fa-file"></i>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div id="panels">
+    <div class="panel-1 active tab-content py-5">
+      {% comment %} ------------ House Hold {% endcomment %}
+      <div class="flex justify-center">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y text-sm">
+            <thead class="bg-gray-100">
+              <tr>
+                <th
+                  class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                >
+                  Names
+                </th>
+                <th
+                  class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                >
+                  Sex
+                </th>
+                <th
+                  class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                >
+                  ID
+                </th>
+                <th
+                  class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                >
+                  Date
+                </th>
+                <th
+                  class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                >
+                  Date
+                </th>
+                <th
+                  class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                >
+                  Insurence Status
+                </th>
+                <th
+                  class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-500">
+              <tr class="">
+                <td
+                  class="whitespace-nowrap px-4 py-5 font-medium text-gray-900"
+                >
+                  <i
+                    class="fa-solid fa-house rounded-full text-sm bg-blue-400 p-1 text-white"
+                  ></i>
+
+                  John Doe Damalover
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                  1992313452445245
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                  24/05/1995
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-900">
+                  <span class="bg-green-200 rounded-lg p-1">
+                    Allowed to be treated
+                  </span>
+                </td>
+                <td class="whitespace-nowrap py-2 text-gray-900 rounded-lg">
+                  <div class="flex justify-around">
+                    <div class="border">
+                      <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <div class="border">
+                      <i class="fa-solid fa-file"></i>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="whitespace-nowrap px-4 py-5 font-medium text-gray-900"
+                >
+                  John Doe Damalover
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                  1992313452445245
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                  24/05/1995
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-900">
+                  <span class="bg-green-200 rounded-lg p-1">
+                    Allowed to be treated
+                  </span>
+                </td>
+                <td class="whitespace-nowrap py-2 text-gray-900 rounded-lg">
+                  <div class="flex justify-around">
+                    <div class="border">
+                      <a href="{% url 'patients:household_search' %}">
+                        <i class="fa-solid fa-eye"></i>
+                      </a>
+                    </div>
+                    <div class="border">
+                      <i class="fa-solid fa-file"></i>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
+                >
+                  John Doe Damalover
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                  1992313452445245
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                  24/05/1995
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-900">
+                  <span class="bg-green-200 rounded-lg p-1">
+                    Allowed to be treated
+                  </span>
+                </td>
+                <td class="whitespace-nowrap py-2 text-gray-900 rounded-lg">
+                  <div class="flex justify-around">
+                    <div class="border">
+                      <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <div class="border">
+                      <i class="fa-solid fa-file"></i>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% comment %} -----------------Second Tab {% endcomment %}
+    <div class="panel-2 tab-content py-5">
+      <div class="flex justify-center">
+        <div class="w-2/3">
+          <h2 class="text-sm title-font text-gray-500 tracking-widest">
+            Family
+          </h2>
+          <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">
+            Family of Mumbere
+          </h1>
+
+          <div class="leading-relaxed mb-4">
+            <div class="flex border-t border-gray-200 py-2">
+              <span class="text-gray-500">National Id of Rep</span>
+              <span class="ml-auto text-gray-900">1998474729474678</span>
+            </div>
+          </div>
+          <div class="flex border-t border-gray-200 py-2">
+            <span class="text-gray-500">Icyiciro</span>
+            <span class="ml-auto text-gray-900">3</span>
+          </div>
+          <div class="flex border-t border-gray-200 py-2">
+            <span class="text-gray-500">Kwemeza kwivuza</span>
+            <span
+              class="ml-auto text-xs text-gray-900 bg-green-100 rounded-full p-1"
+            >
+              Eligible
+            </span>
+          </div>
+          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+            <span class="text-gray-500">Ayo Kwishyura</span>
+            <span class="ml-auto text-gray-900">24000 Frw</span>
+          </div>
+          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+            <span class="text-gray-500">Number of people in charge</span>
+            <span class="ml-auto text-gray-900">8</span>
+          </div>
+          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+            <span class="text-gray-500">Already Paid</span>
+            <span class="ml-auto text-gray-900">24000 Frw</span>
+          </div>
+          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+            <span class="text-gray-500">Paid Percentage</span>
+            <span class="ml-auto text-gray-900">100%</span>
+          </div>
+          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+            <span class="text-gray-500">Paid Percentage</span>
+            <span class="ml-auto text-gray-900">12/313/4134</span>
+          </div>
+          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+            <span class="text-gray-500">Place of residence</span>
+            <span class="ml-auto text-gray-900">
+              Southen Huye Karama. Gahoro Umuyange
+            </span>
+          </div>
+          <div class="flex tabs">
+            <button
+              data-target="panel-1"
+              class="flex ml-auto tab text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
+            >
+              Umuyango
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
 {% endblock %}

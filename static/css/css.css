@@ -14,3 +14,9 @@
 .mobile-menu ul li:hover ul {
   display: block;
 }
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
