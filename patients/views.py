@@ -47,3 +47,14 @@ def patient(request,pk):
     return render(request, 'patients/patient.html',{"patient":pol})
 
 
+def household_serach(request):
+    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    # context = {'latest_question_list': latest_question_list}
+    context={"name":"ilnuga gisa dnaiel","patients":lst}
+    return render(request, 'patients/household_search.html',context)
+
+def household(request,pk):
+    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    # context = {'latest_question_list': latest_question_list}
+    context={"name":"ilnuga gisa dnaiel","household":pk}
+    return render(request, 'patients/household.html',context)
