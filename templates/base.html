@@ -1,4 +1,4 @@
-{% load tailwind_tags %}
+{% load static %} {% load tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     {% tailwind_css %}
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/css.css' %}" />
   </head>
   <body class="bg-gray-50 font-serif leading-normal tracking-normal">
     {% include 'nav.html' %} {% if messages %} {% for message in messages %}
@@ -18,4 +21,6 @@
     </div>
     {% endfor %} {% endif %} {% block content %} {% endblock %}
   </body>
+
+  <script src="{% static 'js/app.js' %}"></script>
 </html>

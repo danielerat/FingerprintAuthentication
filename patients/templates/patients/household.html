@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% block content %}
+
+<section>
+  <div class="flex justify-center">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y text-sm">
+        <thead class="bg-gray-100">
+          <tr>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Names
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Sex
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              ID
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Date
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Date
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Insurence Status
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-gray-200">
+          <tr>
+            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+              John Doe Damalover
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              1992313452445245
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              24/05/1995
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-900">
+              <span class="bg-green-200 rounded-lg p-1">
+                Allowed to be treated
+              </span>
+            </td>
+            <td class="whitespace-nowrap py-2 text-gray-900 rounded-lg">
+              <div class="flex justify-around">
+                <div class="border">
+                  <i class="fa-solid fa-eye"></i>
+                </div>
+                <div class="border">
+                  <i class="fa-solid fa-file"></i>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
