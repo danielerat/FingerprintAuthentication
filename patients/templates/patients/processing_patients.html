@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% block content %}
+
+<section>
+  <div class="flex flex-col text-center w-full my-12">
+    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+      Process Patients being treated
+    </h1>
+    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+      Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.
+    </p>
+  </div>
+  <div class="flex justify-center">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y text-sm">
+        <thead class="bg-gray-100">
+          <tr>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Names
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Sex
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              ID
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Date
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Date
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Status
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-gray-500">
+          <tr class="">
+            <td class="whitespace-nowrap px-4 py-5 font-medium text-gray-900">
+              <i
+                class="fa-brands fa-hire-a-helper rounded-full bg-blue-400 p-1 text-white"
+              ></i>
+
+              John Doe Damalover
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              1992313452445245
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              24/05/1995
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-900">
+              <span class="bg-site-yellow-4 rounded-lg p-1">Pending</span>
+            </td>
+            <td class="whitespace-nowrap py-2 text-xl rounded-lg">
+              <div class="flex justify-around">
+                <div class="text-site-yellow-1">
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+                <div class="text-site-green-1">
+                  <i class="fa-solid fa-microchip"></i>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

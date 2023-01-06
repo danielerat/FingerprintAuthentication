@@ -35,7 +35,7 @@ class Family(models.Model):
     phone=models.CharField(null=True, blank=True,max_length=15)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
-        return self.firstName
+        return self.nationalId
 
 class Bill(models.Model):
     patient=models.ForeignKey(Family,on_delete=models.CASCADE)

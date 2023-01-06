@@ -64,3 +64,16 @@ def household_member(request):
     # context = {'latest_question_list': latest_question_list}
     context={"name":"ilnuga gisa dnaiel","household":""}
     return render(request,'patients/household_member.html',context)
+
+def processing(request):
+    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    # context = {'latest_question_list': latest_question_list}
+    context={"name":"ilnuga gisa dnaiel","household":""}
+    return render(request,'patients/processing_patients.html',context)
+
+def authenticate(request):
+    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    # context = {'latest_question_list': latest_question_list}
+    context={"name":"ilnuga gisa dnaiel","household":""}
+    return render(request,'patients/authenticating_patients.html',context)
+    

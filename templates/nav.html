@@ -36,7 +36,9 @@
           <!-- Submenu ends -->
         </li>
         <li><a href="{% url 'patients:household_member' %}">Member</a></li>
-        <li><a href="#">Contact</a></li>
+        <a href="{%url 'patients:processing'%}" class="block pl-7">
+          Pending Treatmenst
+        </a>
       </ul>
 
       <div class="rounded-full py-2 px-4 text-gray-800 flex items-center">
@@ -116,7 +118,9 @@
           <li
             class="border-b-2 border-white hover:bg-blue-400 hover:text-white pl-4"
           >
-            <a href="#" class="block pl-7">Contact</a>
+            <a href="{%url 'patients:processing'%}" class="block pl-7">
+              Pending Treatmenst
+            </a>
           </li>
         </ul>
       </div>
