@@ -1,5 +1,4 @@
-{% extends 'base.html' %} {% block content %}
-
+{% extends 'base.html' %} {% block content %} {% load my_filters %}
 <section>
   {% comment %} -------------------------------- {% endcomment %}
   <div class="bg-white">
@@ -66,49 +65,18 @@
             </thead>
 
             <tbody class="divide-y divide-gray-500">
-              <tr class="">
-                <td
-                  class="whitespace-nowrap px-4 py-5 font-medium text-gray-900"
-                >
-                  <i
-                    class="fa-brands fa-hire-a-helper rounded-full bg-blue-400 p-1 text-white"
-                  ></i>
-
-                  John Doe Damalover
-                </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  1992313452445245
-                </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  24/05/1995
-                </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-900">
-                  <span class="bg-green-200 rounded-lg p-1">
-                    Allowed to be treated
-                  </span>
-                </td>
-                <td class="whitespace-nowrap py-2 text-gray-900 rounded-lg">
-                  <div class="flex justify-around">
-                    <div class="">
-                      <i class="fa-solid fa-eye text-site-yellow-2"></i>
-                    </div>
-                    <div class="">
-                      <i class="fa-solid fa-microchip text-site-green-2"></i>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+              {% for member in members %}
               <tr>
                 <td
                   class="whitespace-nowrap px-4 py-5 font-medium text-gray-900"
                 >
-                  John Doe Damalover
+                  {{member.firstName}} {{member.lastName}}
                 </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  1992313452445245
+                  {{member.sex|gender_label}}
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                  {{member.nationalId}}
                 </td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">
@@ -134,36 +102,7 @@
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td
-                  class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
-                >
-                  John Doe Damalover
-                </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  1992313452445245
-                </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  24/05/1995
-                </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-900">
-                  <span class="bg-green-200 rounded-lg p-1">
-                    Allowed to be treated
-                  </span>
-                </td>
-                <td class="whitespace-nowrap py-2 text-gray-900 rounded-lg">
-                  <div class="flex justify-around">
-                    <div class="border">
-                      <i class="fa-solid fa-eye text-site-yellow-2"></i>
-                    </div>
-                    <div class="border">
-                      <i class="fa-solid fa-microchip text-site-green-2"></i>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>

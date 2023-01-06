@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-# from .models import Question
+from django.shortcuts import render, get_object_or_404, redirect
 
+from django.http import HttpResponse
+from .models import Patriarch
+from django.contrib import messages
 # Create your views here.
 lst=[
     {
@@ -53,11 +54,15 @@ def household_serach(request):
     context={"name":"ilnuga gisa dnaiel","patients":lst}
     return render(request, 'patients/household_search.html',context)
 
-def household(request):
-    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # context = {'latest_question_list': latest_question_list}
-    context={"name":"ilnuga gisa dnaiel","household":""}
-    print(request.user.id)
+def household(request,pk):
+    try:
+        household = Patriarch.objects.get(nationalId=pk)
+        household_members=household.family_set.all()
+    except:
+        messages.error(request, "Unknown Household")
+        return redirect('patients:household_search')
+
+    context={"household":household,'members':household_members}
     return render(request,'patients/household.html',context)
 
 def household_member(request):
