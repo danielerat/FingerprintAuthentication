@@ -1,9 +1,9 @@
-{% extends 'base.html' %} {% block content %} {% comment %} -------------------
-{% endcomment %}
+{% extends 'base.html' %} {% block content %} {%load static %} {% comment %}
+------------------- {% endcomment %}
 
-<section class="relative flex flex-wrap lg:h-screen lg:items-center">
-  <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
-    <div class="mx-auto max-w-lg text-center">
+<section class="relative flex flex-col-reverse md:flex-row justify-around">
+  <div class="w-2/3 md:w-1/3 items-center">
+    <div class="mx-auto max-w-lg text-center mt-10">
       <h1 class="text-2xl font-bold sm:text-3xl">Get started today!</h1>
 
       <p class="mt-4 text-gray-500">
@@ -12,15 +12,17 @@
       </p>
     </div>
 
-    <form action="" class="mx-auto mt-8 mb-0 max-w-md space-y-4">
+    <form action="" method="POST" class="mx-auto mt-8 mb-0 max-w-md space-y-4">
+      {% csrf_token %}
       <div>
         <label for="email" class="sr-only">Email</label>
 
         <div class="relative">
           <input
-            type="email"
+            type="text"
+            type="username"
             class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
-            placeholder="Enter email"
+            placeholder="Your Username or Phone number"
           />
 
           <span class="absolute inset-y-0 right-4 inline-flex items-center">
@@ -47,6 +49,8 @@
         <div class="relative">
           <input
             type="password"
+            name="password"
+            placeholder="••••••••"
             class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
             placeholder="Enter password"
           />
@@ -77,27 +81,21 @@
       </div>
 
       <div class="flex items-center justify-between">
-        <p class="text-sm text-gray-500">
-          No account?
-          <a href="#" class="underline">Sign up</a>
-        </p>
+        <div class="text-xs text-site-green-1">
+          <a href="" class="text-site-green-1 underline">Forget Password?</a>
+        </div>
 
-        <button
+        <input
           type="submit"
+          value="Sign in"
           class="ml-3 inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
-        >
-          Sign in
-        </button>
+        />
       </div>
     </form>
   </div>
 
-  <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
-    <img
-      alt="Welcome"
-      src="https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-      class="absolute inset-0 h-full w-full object-cover"
-    />
+  <div class="w-2/3 md:w-1/3 flex items-center">
+    <img alt="Welcome" src="{% static 'images/login.svg' %}" class="w-2/2" />
   </div>
 </section>
 

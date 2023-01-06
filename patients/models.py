@@ -52,3 +52,10 @@ class Prescription(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
         return self.bill
+
+class Address(models.Model):
+    province = models.CharField(max_length=100) 
+    district = models.CharField(max_length=100) 
+    village = models.CharField(max_length=100) 
+    date=models.DateField(null=True,blank=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
