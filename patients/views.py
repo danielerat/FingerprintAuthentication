@@ -57,6 +57,7 @@ def household(request):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # context = {'latest_question_list': latest_question_list}
     context={"name":"ilnuga gisa dnaiel","household":""}
+    print(request.user.id)
     return render(request,'patients/household.html',context)
 
 def household_member(request):

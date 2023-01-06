@@ -50,3 +50,10 @@ function onTabClick(event) {
 for (let i = 0; i < tab.length; i++) {
   tab[i].addEventListener("click", onTabClick, false);
 }
+
+const dropdownButton = document.querySelector(".profileShowAndHideDropdown");
+const dropdownMenu = document.querySelector(".contentShowHide");
+
+dropdownButton.addEventListener("click", () => {
+  dropdownMenu.classList.toggle("hidden");
+});

@@ -6,10 +6,12 @@
         src="https://avrasys.hu/logoipsum-logo-54.svg"
         alt="Tailwindcss Navigation"
       />
-
+      {% if request.user.is_authenticated %}
       <ul class="hidden md:flex space-x-6">
         <li><a href="{% url 'patients:household_search' %}">Search</a></li>
+        {% comment %}
         <li><a href="{% url 'patients:household' %}">Household</a></li>
+        {% endcomment %} {% comment %}
         <li class="flex relative group">
           <a href="#" class="mr-1">Services</a>
           <i class="fa-solid fa-chevron-down fa-2xs pt-3"></i>
@@ -35,23 +37,66 @@
           </ul>
           <!-- Submenu ends -->
         </li>
+        {% endcomment %} {% comment %}
         <li><a href="{% url 'patients:household_member' %}">Member</a></li>
+        {% endcomment %}
         <a href="{%url 'patients:processing'%}" class="block pl-7">
           Pending Treatmenst
         </a>
       </ul>
-      {% if request.user.is_authenticated %}
-      <div class="rounded-full py-2 px-4 text-gray-800 flex items-center">
+
+      <div class="flex items-center profileShowAndHideDropdown">
+        <div class="ml-auto">
+          <div class="relative inline-block">
+            <button
+              class="flex items-center px-4 py-2 text-sm leading-5 font-medium text-gray-700 transition duration-150 ease-in-out rounded-md hover:text-gray-500 focus:outline-none focus:shadow-outline-blue active:text-gray-800"
+            >
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+            <div
+              class="origin-top-right absolute right-24 mt-2 rounded-md shadow-lg hidden contentShowHide"
+            >
+              <div class="rounded-md bg-white shadow-xs">
+                <div class="py-1">
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-site-green-5 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                  >
+                    Profile
+                  </a>
+                </div>
+                <div class="border-t border-gray-100"></div>
+                <div class="py-1">
+                  <a
+                    href="{% url 'users:logout'%}"
+                    class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-site-green-5 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                  >
+                    Logout
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <img
+          class="w-10 h-10 rounded-full"
           src="{% static 'images/profile.svg' %}"
-          alt="Profile Image"
-          class="w-8 h-8 rounded-full border-2 mr-5"
+          alt="myProfile"
         />
-        <div>
-          <div class="font-bold">John Doe</div>
-          <div class="text-xs">johndoe@example.com</div>
+        <div class="ml-3">
+          <p class="text-sm leading-5 font-medium text-gray-900">
+            Ilunga Gisa Daniel
+          </p>
+          <p class="text-sm leading-5 text-gray-500">dniel#fsfewc.dffe</p>
         </div>
       </div>
+
       {% else %}
       <a
         href="{% url 'users:login' %}"

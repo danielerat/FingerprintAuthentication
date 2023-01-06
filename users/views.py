@@ -12,29 +12,29 @@ from .forms import CustomUserCreationForm, ProfileForm, MessageForm
 
 def login_user(request):
     page = 'login'
-    # if request.user.is_authenticated:
-    #     return redirect('patients:patients')
-    # if request.method == 'POST':
-    #     username = request.POST['username']
-    #     password = request.POST['password']
-    #     try:
-    #         user = User.objects.get(username=username)
-    #     except:
-    #         messages.error(request, "Username or Password Does not Exist")
-    #         return render(request, 'registration/login_register.html')
+    if request.user.is_authenticated:
+        return redirect('patients:patients')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, "Unknown Username or Password")
+            return render(request, 'registration/login_register.html')
 
-    #     user = authenticate(request, username=username, password=password)
-    #     if user is not None:
-    #         login(request, user)
-    #         return redirect(request.GET['next'] if 'next' in request.GET else 'users:account')
-    #     else:
-    #         messages.error(request, "Username or Password Does not Exist")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(request.GET['next'] if 'next' in request.GET else 'patients:household_search')
+        else:
+            messages.error(request, "Unknown Username Or Password")
     return render(request, 'registration/login_register.html')
 
 
 def logout_user(request):
     logout(request)
-    messages.info(request, "User was logged out")
+    messages.info(request, "You were Logged Out Successfully")
     return redirect('users:login')
 
 

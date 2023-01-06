@@ -111,3 +111,55 @@
     transform: rotate(360deg);
   }
 }
+
+.alert {
+  display: inline-flex;
+  gap: 3rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
+  border-radius: 3px;
+  border: 1px solid var(--color-white-light);
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  background-color: #006b1b;
+}
+
+.alert,
+.alert > .alert__message {
+  background-color: #c8dde3;
+  color: #334e68;
+  font-size: 16px;
+  font-weight: medium;
+}
+
+.alert.alert--error,
+.alert.alert--error > .alert__message {
+  background-color: #fff3c4;
+  color: #8d2b0b;
+}
+
+.alert.alert--success,
+.alert.alert--success > .alert__message {
+  background-color: #8eedc7;
+  color: #014d40;
+}
+
+.alert > .alert__close {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  outline: transparent;
+  font-size: 2rem;
+  transition: 1s;
+}
+
+.alert > .alert__close:hover {
+  opacity: 0.85;
+}
+
+.alert {
+  position: absolute;
+  right: 0;
+  z-index: 100 !important;
+}
