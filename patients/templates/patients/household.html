@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %} {% load my_filters %}
+<!-- prettier-ignore -->
+{% extends 'base.html' %} {% block content %} {% load my_filters %} {% load static %}
 <section>
   {% comment %} -------------------------------- {% endcomment %}
   <div class="bg-white">
@@ -70,17 +71,21 @@
                 <td
                   class="whitespace-nowrap px-4 py-5 font-medium text-gray-900"
                 >
-                  {{member.firstName}} {{member.lastName}}
+                  {% if member.nationalId == household.nationalId %}
+                  <i
+                    class="fa-brands fa-hire-a-helper rounded-full bg-blue-400 p-1 text-white"
+                  ></i>
+                  {% endif %} {{member.firstName}} {{member.lastName}}
                 </td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  {{member.sex|gender_label}}
+                  {{ member.sex | gender_label }}
                 </td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                   {{member.nationalId}}
                 </td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  24/05/1995
+                  {{member.dob}}
                 </td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-900">
                   <span class="bg-green-200 rounded-lg p-1">
@@ -92,12 +97,14 @@
                 >
                   <div class="flex justify-around">
                     <div class="border">
-                      <a href="{% url 'patients:household_search' %}">
+                      <a href="{% url 'patients:household_member' member.id %}">
                         <i class="fa-solid fa-eye text-site-yellow-2"></i>
                       </a>
                     </div>
                     <div class="border">
-                      <i class="fa-solid fa-microchip text-site-green-2"></i>
+                      <a href="{% url 'patients:household_member' member.id %}">
+                        <i class="fa-solid fa-microchip text-site-green-2"></i>
+                      </a>
                     </div>
                   </div>
                 </td>
@@ -122,7 +129,9 @@
           <div class="leading-relaxed mb-4">
             <div class="flex border-t border-gray-200 py-2">
               <span class="text-gray-500">National Id of Rep</span>
-              <span class="ml-auto text-gray-900">1998474729474678</span>
+              <span class="ml-auto text-gray-900">
+                {{household.nationalId}}
+              </span>
             </div>
           </div>
           <div class="flex border-t border-gray-200 py-2">
@@ -142,8 +151,8 @@
             <span class="ml-auto text-gray-900">24000 Frw</span>
           </div>
           <div class="flex border-t border-b mb-6 border-gray-200 py-2">
-            <span class="text-gray-500">Number of people in charge</span>
-            <span class="ml-auto text-gray-900">8</span>
+            <span class="text-gray-500">Number of people</span>
+            <span class="ml-auto text-gray-900">{{members.count}}</span>
           </div>
           <div class="flex border-t border-b mb-6 border-gray-200 py-2">
             <span class="text-gray-500">Already Paid</span>

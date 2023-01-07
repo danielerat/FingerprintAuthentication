@@ -54,8 +54,10 @@ class Prescription(models.Model):
         return self.bill
 
 class Address(models.Model):
+    Patriarch=models.OneToOneField(Patriarch, on_delete=models.CASCADE)
     province = models.CharField(max_length=100) 
     district = models.CharField(max_length=100) 
+    sector = models.CharField(max_length=100) 
     village = models.CharField(max_length=100) 
     date=models.DateField(null=True,blank=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)

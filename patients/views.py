@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.http import HttpResponse
-from .models import Patriarch
+from .models import Patriarch,Family
 from django.contrib import messages
 # Create your views here.
 lst=[
@@ -26,8 +26,8 @@ lst=[
 
 def index(request):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # context = {'latest_question_list': latest_question_list}
-     return HttpResponse('patients/test.html')
+    context = {'sick':'inkorora'}
+    return render(request,'patients/test.html',context )
     
 
 def patients(request):
@@ -36,7 +36,6 @@ def patients(request):
     context={"name":"ilnuga gisa dnaiel","patients":lst}
     return render(request, 'patients/patients.html',context)
 def patient(request,pk):
-    
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # context = {'latest_question_list': latest_question_list}
     pol=1
@@ -49,14 +48,21 @@ def patient(request,pk):
 
 
 def household_serach(request):
-    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # context = {'latest_question_list': latest_question_list}
-    context={"name":"ilnuga gisa dnaiel","patients":lst}
-    return render(request, 'patients/household_search.html',context)
-
+    
+    if request.method == 'POST':
+        id = request.POST['householdId']
+        try:
+            householdId = Patriarch.objects.get(nationalId=id)
+            print(householdId.id)
+            return redirect('patients:household', pk=householdId.id)
+        except:
+            messages.error(request, "Unknown Id Card, Make sure you write well the ID")
+            return render(request, 'patients/household_search.html')
+    return render(request, 'patients/household_search.html')
+   
 def household(request,pk):
     try:
-        household = Patriarch.objects.get(nationalId=pk)
+        household = Patriarch.objects.get(id=pk)
         household_members=household.family_set.all()
     except:
         messages.error(request, "Unknown Household")
@@ -65,10 +71,17 @@ def household(request,pk):
     context={"household":household,'members':household_members}
     return render(request,'patients/household.html',context)
 
-def household_member(request):
-    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # context = {'latest_question_list': latest_question_list}
-    context={"name":"ilnuga gisa dnaiel","household":""}
+
+
+
+def household_member(request,pk):
+    try:
+        member = Family.objects.get(id=pk)
+    except:
+        messages.error(request, "Invalid Family Member, Make sure you select the correct Family Member")
+        return redirect('patients:household_search')
+
+    context={"member":member}
     return render(request,'patients/household_member.html',context)
 
 def processing(request):
@@ -77,9 +90,12 @@ def processing(request):
     context={"name":"ilnuga gisa dnaiel","household":""}
     return render(request,'patients/processing_patients.html',context)
 
-def authenticate(request):
-    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # context = {'latest_question_list': latest_question_list}
-    context={"name":"ilnuga gisa dnaiel","household":""}
+def authenticate(request,pk):
+    try:
+        member = Family.objects.get(id=pk)
+    except:
+        messages.error(request, "Invalid Family Member, Make sure you select the correct Family Member")
+        return redirect('patients:household_search')
+    context={"member":member}
     return render(request,'patients/authenticating_patients.html',context)
     

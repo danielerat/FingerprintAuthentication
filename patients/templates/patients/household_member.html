@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %} {% load static %}
+<!-- prettier-ignore -->
+{% extends 'base.html' %} {% block content %} {% load static %} {% load my_filters %}
 <section class="text-gray-600 body-font overflow-hidden">
   <div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex md:flex-row flex-col-reverse">
@@ -16,19 +17,23 @@
         </p>
         <div class="flex border-t border-gray-200 py-2">
           <span class="text-gray-500">Names</span>
-          <span class="ml-auto text-gray-900">Mumbere Carlos James</span>
+          <span class="ml-auto text-gray-900">
+            {{member.firstName}} {{member.lastName}}
+          </span>
         </div>
         <div class="flex border-t border-gray-200 py-2">
           <span class="text-gray-500">National Id</span>
-          <span class="ml-auto text-gray-900">199283248248139</span>
+          <span class="ml-auto text-gray-900">{{member.nationalId}}</span>
         </div>
         <div class="flex border-t border-gray-200 py-2">
           <span class="text-gray-500">Sex</span>
-          <span class="ml-auto text-gray-900">Medium</span>
+          <span class="ml-auto text-gray-900">
+            {{ member.sex|gender_label }}
+          </span>
         </div>
         <div class="flex border-t border-gray-200 py-2">
           <span class="text-gray-500">Date of Birth</span>
-          <span class="ml-auto text-gray-900">22/31/189</span>
+          <span class="ml-auto text-gray-900">{{member.dob}}</span>
         </div>
         <div class="flex border-t border-gray-200 py-2">
           <span class="text-gray-500">Payment Status</span>
@@ -37,8 +42,12 @@
           </span>
         </div>
         <div class="flex border-t border-b mb-6 border-gray-200 py-2">
-          <span class="text-gray-500">Quantity</span>
-          <span class="ml-auto text-gray-900">4</span>
+          <span class="text-gray-500">Email</span>
+          <span class="ml-auto text-gray-900">{{member.email}}</span>
+        </div>
+        <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <span class="text-gray-500">Phone Number</span>
+          <span class="ml-auto text-gray-900">{{member.phoneNumber}}</span>
         </div>
         <div class="flex justify-end">
           <button
@@ -49,7 +58,9 @@
           <button
             class="rounded-full w-10 h-10 bg-green-200 p-2 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
           >
-            <i class="fa-solid fa-fingerprint text-blue-500"></i>
+            <a href="{% url 'patients:hausehold_authentication' member.pk %}">
+              <i class="fa-solid fa-fingerprint text-blue-500"></i>
+            </a>
           </button>
         </div>
       </div>

@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %} {%load static%}
+<!-- prettier-ignore -->
+{% extends 'base.html' %} {% block content %} {%load static%} {%load my_filters%}
 <section class="text-gray-600 body-font">
   <div
     class="w-2/3 container px-5 py-40 mx-auto flex flex-col-reverse md:flex-row items-center"
@@ -27,7 +28,8 @@
         </div>
       </div>
       <h1 class="title-font font-medium text-2xl text-center text-site-green-1">
-        Ilunga Gisa Daniel, Sex: Male
+        {{member.firstName}} {{member.lastName}}, Sex:
+        {{member.sex|gender_label}}
       </h1>
     </div>
     <div class="lg:w-2/5 md:w-1/2">
