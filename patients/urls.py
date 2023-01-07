@@ -9,6 +9,7 @@ urlpatterns = [
     path('household/member/<str:pk>', views.household_member, name='household_member'),
     path('search/', views.household_serach, name='household_search'),
     path('processing/', views.processing, name='processing'),
+    path('deleteProcessing/<str:pk>', views.deleteProcessingPatient, name='delete_processing_patient'),
     path('authentication/<str:pk>', views.authenticate, name='hausehold_authentication'),
 
 ]

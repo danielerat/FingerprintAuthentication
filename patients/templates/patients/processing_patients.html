@@ -1,5 +1,4 @@
-{% extends 'base.html' %} {% block content %}
-
+{% extends 'base.html' %} {% block content %} {% load my_filters %}
 <section>
   <div class="flex flex-col text-center w-full my-12">
     <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
@@ -32,7 +31,12 @@
             <th
               class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
             >
-              Date
+              Chief of the house
+            </th>
+            <th
+              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+            >
+              Class
             </th>
             <th
               class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
@@ -53,27 +57,35 @@
         </thead>
 
         <tbody class="divide-y divide-gray-500">
+          {%for p in processing %}
           <tr class="">
             <td class="whitespace-nowrap px-4 py-5 font-medium text-gray-900">
-              <i
-                class="fa-brands fa-hire-a-helper rounded-full bg-blue-400 p-1 text-white"
-              ></i>
-
-              John Doe Damalover
+              {{p.patient.firstName}} {{p.patient.lastName}}
             </td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              1992313452445245
+              {{p.patient.nationalId}}
             </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">1998</td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">24/05/1f</td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              {{p.patient.chief.nationalId}}
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              {{p.patient.chief.healthclass.Class|health_class}}
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              {{p.patient.dob}}
+            </td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-900">
               <span class="bg-site-yellow-4 rounded-lg p-1">Pending</span>
             </td>
             <td class="whitespace-nowrap py-2 text-2xl rounded-lg">
               <div class="flex justify-around">
                 <div class="text-site-yellow-1">
-                  <i class="fa-solid fa-circle-xmark"></i>
+                  <a
+                    href="{% url 'patients:delete_processing_patient' p.patient.id %}"
+                  >
+                    <i class="fa-solid fa-circle-xmark"></i>
+                  </a>
                 </div>
                 <div class="text-site-green-1">
                   <i class="fa-solid fa-pills"></i>
@@ -81,6 +93,7 @@
               </div>
             </td>
           </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

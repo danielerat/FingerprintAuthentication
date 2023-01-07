@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.http import HttpResponse
-from .models import Patriarch,Family
+from .models import Patriarch,Family,Processing
 from django.contrib import messages
 # Create your views here.
 lst=[
@@ -85,9 +85,9 @@ def household_member(request,pk):
     return render(request,'patients/household_member.html',context)
 
 def processing(request):
-    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # context = {'latest_question_list': latest_question_list}
-    context={"name":"ilnuga gisa dnaiel","household":""}
+    healthFaculty=request.user.profile.health_faculty
+    processing = Processing.objects.filter(healthFaculty=healthFaculty)
+    context={"processing":processing}
     return render(request,'patients/processing_patients.html',context)
 
 def authenticate(request,pk):
@@ -98,4 +98,18 @@ def authenticate(request,pk):
         return redirect('patients:household_search')
     context={"member":member}
     return render(request,'patients/authenticating_patients.html',context)
-    
+
+
+def deleteProcessingPatient(request, pk):
+    try:
+        patient = Processing.objects.get(patient=pk)
+    except:
+        messages.error(request, "Unable to delete processing patient")
+        return redirect('patients:processing')
+   
+    if request.method == 'POST':
+        patient.delete()
+        messages.success(request, " Successfully deleted processing patient")
+        return redirect('patients:processing')
+    context={"patient":patient}
+    return render(request, "patients/delete_processing.html", context)

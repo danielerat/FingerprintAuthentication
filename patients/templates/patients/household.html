@@ -146,30 +146,34 @@
               Eligible
             </span>
           </div>
-          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <div class="flex border-t border-b mb-2 border-gray-200 py-2">
             <span class="text-gray-500">Ayo Kwishyura</span>
-            <span class="ml-auto text-gray-900">24000 Frw</span>
+            <span class="ml-auto text-gray-900">
+              {{members.count|multiply:3000}} Frw
+            </span>
           </div>
-          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <div class="flex border-t border-b mb-2 border-gray-200 py-2">
             <span class="text-gray-500">Number of people</span>
             <span class="ml-auto text-gray-900">{{members.count}}</span>
           </div>
-          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <div class="flex border-t border-b mb-2 border-gray-200 py-2">
             <span class="text-gray-500">Already Paid</span>
-            <span class="ml-auto text-gray-900">24000 Frw</span>
+            <span class="ml-auto text-gray-900">
+              {{members.count|multiply:3000}} Frw
+            </span>
           </div>
-          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <div class="flex border-t border-b mb-2 border-gray-200 py-2">
             <span class="text-gray-500">Paid Percentage</span>
             <span class="ml-auto text-gray-900">100%</span>
           </div>
-          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
-            <span class="text-gray-500">Paid Percentage</span>
-            <span class="ml-auto text-gray-900">12/313/4134</span>
+          <div class="flex border-t border-b mb-2 border-gray-200 py-2">
+            <span class="text-gray-500">Date of Registration</span>
+            <span class="ml-auto text-gray-900">{{household.date}}</span>
           </div>
-          <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <div class="flex border-t border-b mb-2 border-gray-200 py-2">
             <span class="text-gray-500">Place of residence</span>
             <span class="ml-auto text-gray-900">
-              Southen Huye Karama. Gahoro Umuyange
+              {{household.address.province}}-{{household.address.district}}-{{household.address.sector}}-{{household.address.village}}
             </span>
           </div>
           <div class="flex tabs">

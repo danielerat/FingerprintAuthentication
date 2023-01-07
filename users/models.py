@@ -24,7 +24,7 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=200, blank=True, null=True)
     last_name = models.CharField(max_length=200, blank=True, null=True)
     username = models.CharField(max_length=200, blank=True, null=True)
-    HealthFaculty = models.ForeignKey(HealthFaculty, on_delete=models.SET_NULL, null=True, blank=True)
+    health_faculty = models.ForeignKey(HealthFaculty, on_delete=models.SET_NULL, null=True, blank=True)
     email = models.EmailField(max_length=400, blank=True, null=True)
     profile_image = models.ImageField(null=True, upload_to='user_profile', default='user_profile/user-default.png')
     created = models.DateTimeField(auto_now_add=True)

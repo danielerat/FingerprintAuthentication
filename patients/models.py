@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from users.models import HealthFaculty
 
 # Create your models here.
 # Parent of the family
@@ -7,7 +8,6 @@ class Patriarch(models.Model):
     SEX = (
         ('M', 'Male'),
         ('F', 'Female'),
-        
     )
     nationalId=models.CharField(unique=True,null=False,blank=False,max_length=16)
     firstName = models.CharField(max_length=60)
@@ -15,6 +15,7 @@ class Patriarch(models.Model):
     dob=models.DateField(null=True,blank=True)
     sex = models.CharField(max_length=1, choices=SEX)
     email=models.EmailField(null=True, blank=True)
+    date=models.DateField(null=True, blank=True)
     phone=models.CharField(null=True, blank=True,max_length=15)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
@@ -35,7 +36,7 @@ class Family(models.Model):
     phone=models.CharField(null=True, blank=True,max_length=15)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
-        return self.nationalId
+        return self.firstName+" "+ self.nationalId
 
 class Bill(models.Model):
     patient=models.ForeignKey(Family,on_delete=models.CASCADE)
@@ -61,3 +62,25 @@ class Address(models.Model):
     village = models.CharField(max_length=100) 
     date=models.DateField(null=True,blank=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+class Processing(models.Model):
+
+    patient=models.ForeignKey(Family,  on_delete=models.CASCADE) 
+    healthFaculty=models.ForeignKey(HealthFaculty,  on_delete=models.CASCADE,null=True,blank=True) 
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    def __str__(self):
+        return self.patient.firstName
+
+class HealthClass(models.Model):
+    CLASS = (
+        ('1', 'Class 1'),
+        ('2', 'Class 2'),
+        ('3', 'Class 3'),
+        ('4', 'Class 3'),
+    )
+    Patriarch=models.OneToOneField(Patriarch, on_delete=models.CASCADE)
+    Class = models.CharField(max_length=1, choices=CLASS) 
+    date=models.DateField(null=True,blank=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    def __str__(self):
+        return self.Patriarch.firstName +"->"+ self.Class
