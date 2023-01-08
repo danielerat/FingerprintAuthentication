@@ -2,10 +2,11 @@
 <section>
   <div class="flex flex-col text-center w-full my-12">
     <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-      Process Patients being treated
+      Record of treated Patients
+      <i class="fa-solid fa-box-archive"></i>
     </h1>
     <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-      Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.
+      This is a list of authentic patients treated by your hospital
     </p>
   </div>
   <div class="flex justify-center">
@@ -16,32 +17,32 @@
             <th
               class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
             >
-              Names
+              Patient
             </th>
             <th
               class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
             >
-              Sex
+              Exams
             </th>
             <th
               class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
             >
-              ID
+              Procedures
             </th>
             <th
               class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
             >
-              Chief of the house
+              Other
             </th>
             <th
               class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
             >
-              Class
+              Medicine
             </th>
             <th
               class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
             >
-              Date
+              Cost
             </th>
             <th
               class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
@@ -57,41 +58,51 @@
         </thead>
 
         <tbody class="divide-y divide-gray-500">
-          {%for p in processing %}
+          {%for p in invoice %}
           <tr class="">
             <td class="whitespace-nowrap px-4 py-5 font-medium text-gray-900">
-              {{p.patient.firstName}} {{p.patient.lastName}}
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">Male</td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              {{p.patient.nationalId}}
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              {{p.patient.chief.nationalId}}
+              <p>Names: {{p.patient.firstName}} {{p.patient.lastName}}</p>
+              <p>On:{{p.date}}</p>
+              <p>ID: {{p.patient.nationalId}}</p>
+              <p>Sex: {{p.patient.sex|gender_label}}</p>
             </td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              {{p.patient.chief.healthclass.Class|health_class}}
+              <div>
+                {% autoescape off %} {{p.exams|list_items}} {% endautoescape %}
+              </div>
             </td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              {{p.patient.dob}}
+              <!-- prettier-ignore -->
+              {% autoescape off %} {{p.procedures|list_items}} {% endautoescape  %}
             </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <!-- prettier-ignore -->
+              {% autoescape off %} {{p.others|list_items}} {% endautoescape %}
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <!-- prettier-ignore -->
+              {% autoescape off %} {{p.medecines|list_items}} {% endautoescape %}
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <p>Exam Fee: {{p.bill.exams_fee}}</p>
+              <p>Procedures Fee: {{p.bill.procedures_fee}}</p>
+              <p>Other Fee: {{p.bill.others_fee}}</p>
+              <p>Medicine Fee: {{p.bill.medecines_fee}}</p>
+            </td>
+
             <td class="whitespace-nowrap px-4 py-2 text-gray-900">
-              <span class="bg-site-yellow-4 rounded-lg p-1">Pending</span>
+              <span class="bg-site-green-5 rounded-lg p-1">Completed</span>
             </td>
             <td class="whitespace-nowrap py-2 text-2xl rounded-lg">
               <div class="flex justify-around">
                 <div class="text-site-yellow-1">
                   <a
-                    href="{% url 'patients:delete_processing_patient' p.patient.id %}"
+                    href="{% url 'patients:delete_recorded_patient' p.patient.id %}"
                   >
                     <i class="fa-solid fa-circle-xmark"></i>
                   </a>
                 </div>
-                <div class="text-site-green-1">
-                  <a href="{% url 'patients:create_invoice' p.patient.id %}">
-                    <i class="fa-solid fa-pills"></i>
-                  </a>
-                </div>
+                <div class="text-site-green-1"></div>
               </div>
             </td>
           </tr>

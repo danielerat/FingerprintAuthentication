@@ -25,3 +25,12 @@ def health_class(value):
 @register.filter
 def multiply(value, arg):
     return value * arg
+
+@register.filter
+def list_items(value):
+    list=value.splitlines()
+    data=""
+    for l in list:
+        data+="<li>"+l+"</li>"
+    
+    return data

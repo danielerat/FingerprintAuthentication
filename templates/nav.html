@@ -2,10 +2,12 @@
 <header class="h-20 bg-white">
   <nav class="relative px-2 py-4">
     <div class="container mx-auto flex justify-between items-center">
-      <img
-        src="https://avrasys.hu/logoipsum-logo-54.svg"
-        alt="Tailwindcss Navigation"
-      />
+      <a href="{% url 'patients:household_search' %}">
+        <img
+          src="https://avrasys.hu/logoipsum-logo-54.svg"
+          alt="Tailwindcss Navigation"
+        />
+      </a>
       {% if request.user.is_authenticated %}
       <ul class="hidden md:flex space-x-6">
         <li><a href="{% url 'patients:household_search' %}">Search</a></li>
@@ -65,10 +67,10 @@
               <div class="rounded-md bg-white shadow-xs">
                 <div class="py-1">
                   <a
-                    href="#"
+                    href="{% url 'patients:records' %}"
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-site-green-5 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                   >
-                    Profile
+                    Records
                   </a>
                 </div>
                 <div class="border-t border-gray-100"></div>

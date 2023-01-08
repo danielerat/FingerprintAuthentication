@@ -39,20 +39,28 @@ class Family(models.Model):
         return self.firstName+" "+ self.nationalId
 
 class Bill(models.Model):
-    patient=models.ForeignKey(Family,on_delete=models.CASCADE)
-    date=models.DateField(null=True,blank=True)
+    consultation_fee=models.DecimalField(max_digits=10, decimal_places=2,null=True,blank=True)
+    exams_fee=models.DecimalField(max_digits=10, decimal_places=2,null=True,blank=True)
+    procedures_fee=models.DecimalField(max_digits=10, decimal_places=2,null=True,blank=True)
+    medecines_fee=models.DecimalField(max_digits=10, decimal_places=2,null=True,blank=True)
+    others_fee=models.DecimalField(max_digits=10, decimal_places=2,null=True,blank=True)
+    date=models.DateField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
-        return self.patient
+        return str(self.date)
 
-class Prescription(models.Model):
-    bill=models.ForeignKey(Bill,on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    price=models.DecimalField(max_digits = 9,decimal_places=2)
-    date=models.DateField(null=True,blank=True)
+class Invoice(models.Model):
+    patient=models.ForeignKey(Family,on_delete=models.CASCADE)
+    health_faculty=models.ForeignKey(HealthFaculty,on_delete=models.CASCADE)
+    bill=models.OneToOneField(Bill,on_delete=models.CASCADE)
+    exams=models.TextField()
+    medecines=models.TextField()
+    procedures=models.TextField()
+    others=models.TextField()
+    date=models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
-        return self.bill
+        return self.patient.firstName + " " + self.health_faculty.name
 
 class Address(models.Model):
     Patriarch=models.OneToOneField(Patriarch, on_delete=models.CASCADE)
