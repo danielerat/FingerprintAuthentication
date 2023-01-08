@@ -4,6 +4,7 @@ app_name = 'patients'
 urlpatterns = [
     # Home page
     path('', views.index, name='index'),
+    path('fire/', views.update_firebase, name='fire'),
     path('patients/', views.patients, name='patients'),
     path('household/<str:pk>', views.household, name='household'),
     path('household/member/<str:pk>', views.household_member, name='household_member'),

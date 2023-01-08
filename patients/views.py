@@ -1,49 +1,60 @@
+from queue import Queue
 from django.shortcuts import render, get_object_or_404, redirect
-
+import pyrebase
+from django.utils import timezone
+import time
+from asgiref.sync import async_to_sync
+import threading
 from django.http import HttpResponse
 from .models import Patriarch,Family,Processing,Invoice
 from .forms import InvoiceForm,BillForm
 from django.contrib import messages
-# Create your views here.
-lst=[
-    {
-        'id':1,
-        'name':"Ilulnga gisa daniel",
-        "age":11
-    },
-    {
-        'id':2,
-        'name':"Jacko james",
-        "age":22
-    },
-    {
-        'id':3,
-        'name':"John wick",
-        "age":33
-    },
-   
-]
-    
+from django.http import HttpResponseRedirect
+from django.template.loader import render_to_string
+
+
+# Firebase Configurations
+config = {
+  "apiKey": "AIzaSyBVmS09_NOHFAreKDL4Nou6ZEtBA9_zGEo",
+  "authDomain": "fingerprintesp-3a43c.firebaseapp.com",
+  "databaseURL": "https://fingerprintesp-3a43c-default-rtdb.firebaseio.com",
+  "projectId": "fingerprintesp-3a43c",
+  "storageBucket": "fingerprintesp-3a43c.appspot.com",
+  "messagingSenderId": "1086377241362",
+  "appId": "1:1086377241362:web:69f85cfadbe417cdb3a1cb"
+}
+firebase=pyrebase.initialize_app(config)
+authe = firebase.auth()
+database=firebase.database()
+
+def update_firebase(request):
+    fam=Family.objects.all()
+    for f in fam:
+       
+        day = database.child('Fingerprints').child(f.id).set(
+            {
+            'id': str(f.id),
+            'last_authentication': str(time.time()),
+        }
+    )
+    return HttpResponse("Ok")
 
 def index(request):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'sick':'inkorora'}
     return render(request,'patients/test.html',context )
-    
+
+
 
 def patients(request):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # context = {'latest_question_list': latest_question_list}
-    context={"name":"ilnuga gisa dnaiel","patients":lst}
-    return render(request, 'patients/patients.html',context)
+    context={"name":"ilnuga gisa dnaiel"}
+    render_to_string('patients/patients.html',context)
 def patient(request,pk):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # context = {'latest_question_list': latest_question_list}
-    pol=1
-    for i in lst:
-        if i.get('id')==pk:
-            pol=i
-            break
+    
 
     return render(request, 'patients/patient.html',{"patient":pol})
 
@@ -91,14 +102,61 @@ def processing(request):
     context={"processing":processing}
     return render(request,'patients/processing_patients.html',context)
 
+
+# async def make_request(pk):
+#     start_time = time.time()
+#     data_found = False
+#     while time.time() - start_time < 60:
+#         data = await database.child("Fingerprints").child(pk).get("last_authentication")
+#         print(data.val())
+#         await asyncio.sleep(1)
+
+
 def authenticate(request,pk):
-    try:
-        member = Family.objects.get(id=pk)
-    except:
-        messages.error(request, "Invalid Family Member, Make sure you select the correct Family Member")
-        return redirect('patients:household_search')
-    context={"member":member}
-    return render(request,'patients/authenticating_patients.html',context)
+    # Get the member object from the database
+    member = Family.objects.get(pk=pk)
+    context = {"member": member}
+    queue = Queue()
+
+    # Define a function to run in a separate thread
+    # to monitor changes in the database
+    def monitor_changes():
+        # Get the starting time
+        starting_time = time.time()
+        while time.time() - starting_time < 5:
+            data = database.child("Fingerprints").child(member.id).get()
+            print(data.val().get('last_authentication'))
+            if str(data.val().get('last_authentication')) == str(50):
+                queue.put('Authentic')
+                print("Authenticated")
+                return
+            time.sleep(1)
+        print("InvalidAuthentication")
+        queue.put('Unauthorized')
+        
+
+    # Start the thread to monitor changes in the database
+    monitoring_thread = threading.Thread(target=monitor_changes)
+    monitoring_thread.daemon = True
+    monitoring_thread.start()
+
+    # Wait for a message to be added to the queue
+    while True:
+
+        
+        # Sleep for a short time before checking the queue again
+        time.sleep(1)
+        if not queue.empty():
+            message = queue.get()
+            if message == 'Authentic':
+                messages.success(request, "User Successfully Authenticated")
+                return redirect('patients:records')
+            elif message == 'Unauthorized':
+                messages.error(request, "Patient Can not be authenticated")
+                return redirect('patients:household_member', pk=member.id)
+        
+        return render(request, 'patients/authenticating_patients.html', context)
+    
 
 
 def deleteProcessingPatient(request, pk):
