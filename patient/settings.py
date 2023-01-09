@@ -12,8 +12,18 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env(
+  # set casting, default value
+  DEBUG=(bool, False)
+)
+
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -46,7 +56,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
 
 ]
-NPM_BIN_PATH ="/usr/bin/npm"
+NPM_BIN_PATH =env('NPM')
 TAILWIND_APP_NAME='theme'
 INTERNAL_IPS=[
     '127.0.0.1'
