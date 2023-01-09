@@ -48,6 +48,9 @@ class Bill(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
         return str(self.date)
+    def total_bill(self):
+        return self.exams_fee + self.consultation_fee + self.procedures_fee + self.medecines_fee + self.others_fee
+
 
 class Invoice(models.Model):
     patient=models.ForeignKey(Family,on_delete=models.CASCADE)

@@ -1,3 +1,4 @@
+<!-- prettier-ignore -->
 {% extends 'base.html' %} {% block content %} {% load my_filters %}
 <section>
   <div class="flex flex-col text-center w-full my-12">
@@ -84,10 +85,15 @@
               {% autoescape off %} {{p.medecines|list_items}} {% endautoescape %}
             </td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              <p>Exam Fee: {{p.bill.exams_fee}}</p>
-              <p>Procedures Fee: {{p.bill.procedures_fee}}</p>
-              <p>Other Fee: {{p.bill.others_fee}}</p>
-              <p>Medicine Fee: {{p.bill.medecines_fee}}</p>
+              <p>Exam Fees: {{p.bill.exams_fee}}</p>
+              <p>Consultation Fees: {{p.bill.consultation_fee}}</p>
+              <p>Procedures Fees: {{p.bill.procedures_fee}}</p>
+              <p>Other Fees: {{p.bill.others_fee}}</p>
+              <p>Medicine Fees: {{p.bill.medecines_fee}}</p>
+              <p>
+                <!-- prettier-ignore -->
+                Total Fees: {{ p.bill.total_bill }}
+              </p>
             </td>
 
             <td class="whitespace-nowrap px-4 py-2 text-gray-900">

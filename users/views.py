@@ -13,7 +13,7 @@ from .forms import CustomUserCreationForm, ProfileForm, MessageForm
 def login_user(request):
     page = 'login'
     if request.user.is_authenticated:
-        return redirect('patients:patients')
+        return redirect('patients:household_search')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']

@@ -34,3 +34,7 @@ def list_items(value):
         data+="<li>"+l+"</li>"
     
     return data
+
+@register.filter
+def add_those(value,arg1,arg2):
+    return value + arg1+arg2

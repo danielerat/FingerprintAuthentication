@@ -50,13 +50,12 @@ def patients(request):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # context = {'latest_question_list': latest_question_list}
     context={"name":"ilnuga gisa dnaiel"}
-    render_to_string('patients/patients.html',context)
+    return HttpResponse('patients/patients.html')
 def patient(request,pk):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # context = {'latest_question_list': latest_question_list}
     
-
-    return render(request, 'patients/patient.html',{"patient":pol})
+    return HttpResponse('patients/patients.html')
 
 
 def household_serach(request):
@@ -117,22 +116,23 @@ def authenticate(request,pk):
     member = Family.objects.get(pk=pk)
     context = {"member": member}
     queue = Queue()
+    queueErr = Queue()
 
     # Define a function to run in a separate thread
     # to monitor changes in the database
     def monitor_changes():
         # Get the starting time
         starting_time = time.time()
-        while time.time() - starting_time < 5:
+        while time.time() - starting_time < 15:
             data = database.child("Fingerprints").child(member.id).get()
             print(data.val().get('last_authentication'))
-            if str(data.val().get('last_authentication')) == str(50):
+            if str(data.val().get('last_authentication')) == str(34):
                 queue.put('Authentic')
                 print("Authenticated")
                 return
             time.sleep(1)
         print("InvalidAuthentication")
-        queue.put('Unauthorized')
+        queueErr.put('Unauthorized')
         
 
     # Start the thread to monitor changes in the database
@@ -154,7 +154,7 @@ def authenticate(request,pk):
             elif message == 'Unauthorized':
                 messages.error(request, "Patient Can not be authenticated")
                 return redirect('patients:household_member', pk=member.id)
-        
+
         return render(request, 'patients/authenticating_patients.html', context)
     
 
