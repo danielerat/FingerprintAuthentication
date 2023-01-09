@@ -127,6 +127,7 @@ def authenticate(request,pk):
             data = database.child("Fingerprints").child(member.id).get()
             print(data.val().get('last_authentication'))
             if str(data.val().get('last_authentication')) == str(34):
+                
                 queue.put('Authentic')
                 print("Authenticated")
                 return

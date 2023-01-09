@@ -87,7 +87,7 @@ class HealthClass(models.Model):
         ('1', 'Class 1'),
         ('2', 'Class 2'),
         ('3', 'Class 3'),
-        ('4', 'Class 3'),
+        ('4', 'Class 4'),
     )
     Patriarch=models.OneToOneField(Patriarch, on_delete=models.CASCADE)
     Class = models.CharField(max_length=1, choices=CLASS) 

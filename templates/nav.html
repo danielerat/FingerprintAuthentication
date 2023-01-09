@@ -1,11 +1,13 @@
 {% load static %}
+
 <header class="h-20 bg-white">
   <nav class="relative px-2 py-4">
     <div class="container mx-auto flex justify-between items-center">
       <a href="{% url 'patients:household_search' %}">
         <img
-          src="https://avrasys.hu/logoipsum-logo-54.svg"
+          src="/static/images/rssb.png"
           alt="Tailwindcss Navigation"
+          style="height: 80px; width: 150px;"
         />
       </a>
       {% if request.user.is_authenticated %}
@@ -43,7 +45,7 @@
         <li><a href="{% url 'patients:household_member' %}">Member</a></li>
         {% endcomment %}
         <a href="{%url 'patients:processing'%}" class="block pl-7">
-          Pending Treatmenst
+          Pending Treatments
         </a>
       </ul>
 
@@ -168,7 +170,7 @@
             class="border-b-2 border-white hover:bg-blue-400 hover:text-white pl-4"
           >
             <a href="{%url 'patients:processing'%}" class="block pl-7">
-              Pending Treatmenst
+              Pending Treatments
             </a>
           </li>
         </ul>
