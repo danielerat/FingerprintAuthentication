@@ -10,6 +10,15 @@
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 
     <link rel="stylesheet" href="{% static 'css/css.css' %}" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+      integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
   </head>
   <body class="bg-gray-50 font-serif leading-normal tracking-normal">
     {% include 'nav.html' %} {% if messages %} {% for message in messages %}

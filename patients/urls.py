@@ -15,5 +15,7 @@ urlpatterns = [
     path('delete_recorded_patient/<str:pk>', views.delete_recorded_patient, name='delete_recorded_patient'),
     path('authentication/<str:pk>', views.authenticate, name='hausehold_authentication'),
     path('create_invoice/<str:pk>', views.create_invoice, name='create_invoice'),
+    path('successfull_authentication/', views.successfullAuthentication, name='successfullAuthentication'),
+    path('failed_authentication/<str:pk>', views.failedAuthentication, name='failedAuthentication'),
 
 ]

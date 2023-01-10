@@ -37,5 +37,56 @@
     </div>
   </div>
 </section>
+<script>
+  var refId = "Fingerprints/{{member.id}}/last_authentication";
+  console.log(refId);
+  var firebaseConfig = {
+    apiKey: "AIzaSyBVmS09_NOHFAreKDL4Nou6ZEtBA9_zGEo",
+    authDomain: "fingerprintesp-3a43c.firebaseapp.com",
+    databaseURL: "https://fingerprintesp-3a43c-default-rtdb.firebaseio.com",
+    projectId: "fingerprintesp-3a43c",
+    storageBucket: "fingerprintesp-3a43c.appspot.com",
+    messagingSenderId: "1086377241362",
+    appId: "1:1086377241362:web:69f85cfadbe417cdb3a1cb",
+  };
+  firebase.initializeApp(firebaseConfig);
+  let db = firebase.database();
+  var intervalId = setInterval(checkForMatch, 1000);
+  setTimeout(function () {
+    clearInterval(intervalId);
+    //Match was not found
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "POST",
+      "http://localhost:8000/households/authentication/2dbb89a8-5b3d-4c5a-be3e-76e105ce0f93"
+    );
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify({ match_found: "false" }));
+    clearInterval(intervalId);
+    window.location.href = "/households/failed_authentication/{{member.id}}";
+  }, 5000);
+
+  function checkForMatch() {
+    db.ref(refId)
+      .once("value")
+      .then(function (snapshot) {
+        var matchFound = snapshot.val() === "33";
+        if (matchFound) {
+          var xhr = new XMLHttpRequest();
+          xhr.open(
+            "POST",
+            "http://localhost:8000/households/authentication/2dbb89a8-5b3d-4c5a-be3e-76e105ce0f93"
+          );
+          xhr.setRequestHeader("Content-Type", "application/json");
+          // Send the request
+          xhr.send(JSON.stringify({ match_found: "true" }));
+          clearInterval(intervalId);
+          window.location.href = "/households/successfull_authentication/";
+        } else {
+          console.log("nop");
+        }
+      });
+  }
+</script>
 
 {% endblock %}

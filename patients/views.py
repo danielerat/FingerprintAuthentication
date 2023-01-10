@@ -3,16 +3,24 @@ from django.shortcuts import render, get_object_or_404, redirect
 import pyrebase
 from django.utils import timezone
 import time
-from asgiref.sync import async_to_sync
 import threading
 from django.http import HttpResponse
 from .models import Patriarch,Family,Processing,Invoice
 from .forms import InvoiceForm,BillForm
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.template.loader import render_to_string
 
 
+from asgiref.sync import async_to_sync,sync_to_async
+
+from django.views.generic import View
+from django.utils.decorators import method_decorator
+
+import asyncio
+from django.http import HttpResponse
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+import json
 # Firebase Configurations
 config = {
   "apiKey": "AIzaSyBVmS09_NOHFAreKDL4Nou6ZEtBA9_zGEo",
@@ -111,55 +119,39 @@ def processing(request):
 #         await asyncio.sleep(1)
 
 
+
+@csrf_exempt
 def authenticate(request,pk):
-    # Get the member object from the database
     member = Family.objects.get(pk=pk)
     context = {"member": member}
-    queue = Queue()
-    queueErr = Queue()
-
-    # Define a function to run in a separate thread
-    # to monitor changes in the database
-    def monitor_changes():
-        # Get the starting time
-        starting_time = time.time()
-        while time.time() - starting_time < 15:
-            data = database.child("Fingerprints").child(member.id).get()
-            print(data.val().get('last_authentication'))
-            if str(data.val().get('last_authentication')) == str(34):
-                
-                queue.put('Authentic')
-                print("Authenticated")
-                return
-            time.sleep(1)
-        print("InvalidAuthentication")
-        queueErr.put('Unauthorized')
-        
-
-    # Start the thread to monitor changes in the database
-    monitoring_thread = threading.Thread(target=monitor_changes)
-    monitoring_thread.daemon = True
-    monitoring_thread.start()
-
-    # Wait for a message to be added to the queue
-    while True:
-
-        
-        # Sleep for a short time before checking the queue again
-        time.sleep(1)
-        if not queue.empty():
-            message = queue.get()
-            if message == 'Authentic':
-                messages.success(request, "User Successfully Authenticated")
-                return redirect('patients:records')
-            elif message == 'Unauthorized':
-                messages.error(request, "Patient Can not be authenticated")
-                return redirect('patients:household_member', pk=member.id)
-
-        return render(request, 'patients/authenticating_patients.html', context)
+    matchOcured = False
     
+    print("POST Not")
+    if request.body:
+        print("POST Made")
+        match=json.loads(request.body.decode('utf-8'))
+        print(match.get("match_found"))
+        if match.get('match_found')=="true" and not matchOcured:
+            matchOcured=True
+            try:
+                messages.success(request, "User Was Authenticated Successfully.")
+                Processing.objects.create(patient=member,healthFaculty=request.user.profile.health_faculty)
+            except:
+                messages.success(request, "User Was Authenticated Successfully.")
+        elif match.get('match_found')=="false" and not matchOcured:
+            print("Failed Authentication")
+            messages.error(request, "Unable To authenticate the user")
+            return 
+        else:
+            print("Match problem")
+    return render(request, 'patients/authenticating_patients.html',context)
 
-
+def successfullAuthentication(request):
+    messages.success(request, "User Was Authenticated Successfully.")
+    return redirect('patients:processing')
+def failedAuthentication(request,pk):
+    messages.error(request, "Unable To authenticate the user")
+    return redirect('patients:household_member',pk=pk)
 def deleteProcessingPatient(request, pk):
     try:
         patient = Processing.objects.get(patient=pk)
