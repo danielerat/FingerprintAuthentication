@@ -12,42 +12,12 @@
       </a>
       {% if request.user.is_authenticated %}
       <ul class="hidden md:flex space-x-6">
-        <li><a href="{% url 'patients:household_search' %}">Search</a></li>
-      
-
-         {% comment %}
-        <li class="flex relative group">
-          <a href="#" class="mr-1">Services</a>
-          <i class="fa-solid fa-chevron-down fa-2xs pt-3"></i>
-          <!-- Submenu starts -->
-          <ul
-            class="absolute bg-white p-3 w-52 top-6 transform scale-0 group-hover:scale-100 transition duration-150 ease-in-out origin-top shadow-lg"
-          >
-            <li class="text-sm hover:bg-slate-100 leading-8">
-              <a href="#">Webdesign</a>
-            </li>
-            <li class="text-sm hover:bg-slate-100 leading-8">
-              <a href="#">Digital marketing</a>
-            </li>
-            <li class="text-sm hover:bg-slate-100 leading-8">
-              <a href="#">SEO</a>
-            </li>
-            <li class="text-sm hover:bg-slate-100 leading-8">
-              <a href="#">Ad campaigns</a>
-            </li>
-            <li class="text-sm hover:bg-slate-100 leading-8">
-              <a href="#">UX Design</a>
-            </li>
-          </ul>
-          <!-- Submenu ends -->
-        </li>
-        {% endcomment %}
-        <li><a href="{% url 'patients:records' %}">Records</a></li>
-        
+        <li><a href="{% url 'patients:household_search' %}">Search</a></li>        
         <li><a href="{%url 'patients:processing'%}">
           Pending Treatments
         </a>
       </li>
+      <li><a href="{% url 'patients:records' %}">Records</a></li>
       </ul>
 
       <div class="flex items-center profileShowAndHideDropdown">
@@ -68,14 +38,7 @@
               class="origin-top-right absolute right-24 mt-2 rounded-md shadow-lg hidden contentShowHide"
             >
               <div class="rounded-md bg-white shadow-xs">
-                <div class="py-1">
-                  <a
-                    href="{% url 'patients:records' %}"
-                    class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-site-green-5 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                  >
-                    Records
-                  </a>
-                </div>
+              
                 <div class="border-t border-gray-100"></div>
                 <div class="py-1">
                   <a
@@ -124,49 +87,12 @@
       <div id="mobile-menu" class="mobile-menu absolute top-23 w-full">
         <!-- add hidden here later -->
         <ul class="bg-gray-100 shadow-lg leading-9 font-bold h-screen">
-          <li
+            <li
             class="border-b-2 border-white hover:bg-blue-400 hover:text-white pl-4"
           >
-            <a href="https://google.com" class="block pl-7">Home</a>
-          </li>
-          <li
-            class="border-b-2 border-white hover:bg-blue-400 hover:text-white pl-4"
-          >
-            <a href="#" class="block pl-7">News</a>
-          </li>
-          <li
-            class="border-b-2 border-white hover:bg-blue-400 hover:text-white"
-          >
-            <a href="#" class="block pl-11">
-              Services
-              <i class="fa-solid fa-chevron-down fa-2xs pt-4"></i>
+            <a href="{% url 'patients:household_search' %}" class="block pl-7">
+              Search
             </a>
-
-            <!-- Submenu starts -->
-            <ul class="bg-white text-gray-800 w-full">
-              <li class="text-sm leading-8 font-normal hover:bg-slate-200">
-                <a class="block pl-16" href="#">Webdesign</a>
-              </li>
-              <li class="text-sm leading-8 font-normal hover:bg-slate-200">
-                <a class="block pl-16" href="#">Digital marketing</a>
-              </li>
-              <li class="text-sm leading-8 font-normal hover:bg-slate-200">
-                <a class="block pl-16" href="#">SEO</a>
-              </li>
-              <li class="text-sm leading-8 font-normal hover:bg-slate-200">
-                <a class="block pl-16" href="#">Ad campaigns</a>
-              </li>
-              <li class="text-sm leading-8 font-normal hover:bg-slate-200">
-                <a class="block pl-16" href="#">UX Design</a>
-              </li>
-            </ul>
-            <!-- Submenu ends -->
-          </li>
-          <li
-            class="border-b-2 border-white hover:bg-blue-400 hover:text-white pl-4"
-          >
-            <a href="#" class="block pl-7">About</a>
-          </li>
           <li
             class="border-b-2 border-white hover:bg-blue-400 hover:text-white pl-4"
           >
