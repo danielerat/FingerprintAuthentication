@@ -2,23 +2,14 @@ from queue import Queue
 from django.shortcuts import render, get_object_or_404, redirect
 import pyrebase
 from django.utils import timezone
-import time
-import threading
+
+from datetime import datetime
+import pytz
 from django.http import HttpResponse
 from .models import Patriarch,Family,Processing,Invoice
 from .forms import InvoiceForm,BillForm
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-
-
-from asgiref.sync import async_to_sync,sync_to_async
-
-from django.views.generic import View
-from django.utils.decorators import method_decorator
-
-import asyncio
 from django.http import HttpResponse
-from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 import json
 # Firebase Configurations
@@ -37,12 +28,15 @@ database=firebase.database()
 
 def update_firebase(request):
     fam=Family.objects.all()
+    my_tz = pytz.timezone("Africa/Kigali")
+    now = datetime.now(my_tz)
+    timestamp=int(datetime.timestamp(now))
+    
     for f in fam:
-       
         day = database.child('Fingerprints').child(f.id).set(
             {
             'id': str(f.id),
-            'last_authentication': str(time.time()),
+            'last_authentication': timestamp,
         }
     )
     return HttpResponse("Ok")

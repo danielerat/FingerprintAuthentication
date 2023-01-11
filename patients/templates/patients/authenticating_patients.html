@@ -64,13 +64,14 @@
     xhr.send(JSON.stringify({ match_found: "false" }));
     clearInterval(intervalId);
     window.location.href = "/households/failed_authentication/{{member.id}}";
-  }, 5000);
+  }, 15000);
 
   function checkForMatch() {
     db.ref(refId)
       .once("value")
       .then(function (snapshot) {
-        var matchFound = snapshot.val() === "33";
+        var matchFound = Date.now() - snapshot.val() === "33";
+        console.log(Date.now().getTime());
         if (matchFound) {
           var xhr = new XMLHttpRequest();
           xhr.open(
