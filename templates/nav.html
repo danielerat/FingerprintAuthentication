@@ -13,9 +13,9 @@
       {% if request.user.is_authenticated %}
       <ul class="hidden md:flex space-x-6">
         <li><a href="{% url 'patients:household_search' %}">Search</a></li>
-        {% comment %}
-        <li><a href="{% url 'patients:household' %}">Household</a></li>
-        {% endcomment %} {% comment %}
+      
+
+         {% comment %}
         <li class="flex relative group">
           <a href="#" class="mr-1">Services</a>
           <i class="fa-solid fa-chevron-down fa-2xs pt-3"></i>
@@ -41,12 +41,13 @@
           </ul>
           <!-- Submenu ends -->
         </li>
-        {% endcomment %} {% comment %}
-        <li><a href="{% url 'patients:household_member' %}">Member</a></li>
         {% endcomment %}
-        <a href="{%url 'patients:processing'%}" class="block pl-7">
+        <li><a href="{% url 'patients:records' %}">Records</a></li>
+        
+        <li><a href="{%url 'patients:processing'%}">
           Pending Treatments
         </a>
+      </li>
       </ul>
 
       <div class="flex items-center profileShowAndHideDropdown">
@@ -173,6 +174,14 @@
               Pending Treatments
             </a>
           </li>
+          
+          <li
+          class="border-b-2 border-white hover:bg-blue-400 hover:text-white pl-4"
+        >
+          <a href="{% url 'patients:records' %}" class="block pl-7">
+           Records
+          </a>
+        </li>
         </ul>
       </div>
     </div>
