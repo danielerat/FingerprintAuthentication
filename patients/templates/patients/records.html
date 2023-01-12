@@ -73,13 +73,14 @@
           <tr class="">
             <td class="whitespace-nowrap px-4 py-5 font-medium text-gray-900">
               <p>Names: {{p.patient.firstName}} {{p.patient.lastName}}</p>
-              <p>On:{{p.patient.dob}}</p>
+              <p>DoB:{{p.patient.dob}}</p>
               <p>ID: {{p.patient.nationalId}}</p>
               <p>Sex: {{p.patient.sex|gender_label}}</p>
             </td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              <p>Chief ID:{{p.patient.chief.nationalId}}</p>
-              <p>Category:{{p.patient.chief.healthclass.Class|health_class}}</p>
+              <p>Chief Id:</p>
+              <p>{{p.patient.chief.nationalId}}</p>
+              <p>Cat:{{p.patient.chief.healthclass.Class|health_class}}</p>
             </td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
               <div>
