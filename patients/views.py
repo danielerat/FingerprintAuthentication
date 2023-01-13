@@ -117,7 +117,7 @@ def processing(request):
 @csrf_exempt
 def authenticate(request,pk):
     member = Family.objects.get(pk=pk)
-    context = {"member": member}
+    context = {"member": member,"time":int(datetime.timestamp(datetime.now()))}
     matchOcured = False
     
     print("POST Not")

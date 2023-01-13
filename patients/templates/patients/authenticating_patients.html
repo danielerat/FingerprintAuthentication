@@ -39,7 +39,8 @@
 </section>
 <script>
   var refId = "Fingerprints/{{member.id}}/last_authentication";
-  console.log(refId);
+  let time = "{{time}}";
+
   var firebaseConfig = {
     apiKey: "AIzaSyBVmS09_NOHFAreKDL4Nou6ZEtBA9_zGEo",
     authDomain: "fingerprintesp-3a43c.firebaseapp.com",
@@ -58,7 +59,7 @@
     var xhr = new XMLHttpRequest();
     xhr.open(
       "POST",
-      "http://localhost:8000/households/authentication/2dbb89a8-5b3d-4c5a-be3e-76e105ce0f93"
+      "http://localhost:8000/households/authentication/{{member.id}}"
     );
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify({ match_found: "false" }));
@@ -70,13 +71,13 @@
     db.ref(refId)
       .once("value")
       .then(function (snapshot) {
-        var matchFound = Date.now() - snapshot.val() === "33";
-        console.log(Date.now().getTime());
+        var matchFound = time - snapshot.val() <= 900;
+
         if (matchFound) {
           var xhr = new XMLHttpRequest();
           xhr.open(
             "POST",
-            "http://localhost:8000/households/authentication/2dbb89a8-5b3d-4c5a-be3e-76e105ce0f93"
+            "http://localhost:8000/households/authentication/{{member.id}}"
           );
           xhr.setRequestHeader("Content-Type", "application/json");
           // Send the request
