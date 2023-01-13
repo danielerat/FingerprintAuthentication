@@ -80,7 +80,7 @@ class Processing(models.Model):
     healthFaculty=models.ForeignKey(HealthFaculty,  on_delete=models.CASCADE,null=True,blank=True) 
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
-        return self.patient.firstName
+        return self.patient.firstName + "=>" + self.healthFaculty.name
     class Meta:
         unique_together = ('patient', 'healthFaculty',)
 class HealthClass(models.Model):

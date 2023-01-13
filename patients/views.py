@@ -100,6 +100,7 @@ def household_member(request,pk):
 def processing(request):
     healthFaculty=request.user.profile.health_faculty
     processing = Processing.objects.filter(healthFaculty=healthFaculty)
+    print(processing)
     context={"processing":processing}
     return render(request,'patients/processing_patients.html',context)
 
@@ -184,7 +185,7 @@ def create_invoice(request,pk):
     health_faculty=request.user.profile.health_faculty
     # Check Whether it is a legit patient from the processing table
     try: 
-        patient = Processing.objects.get(patient=pk)    
+        patient = Processing.objects.get(patient=pk,healthFaculty=health_faculty)    
     except:
         messages.error(request, "Unknown Patient make sure you choose a valid patient")
         return redirect('patients:processing')

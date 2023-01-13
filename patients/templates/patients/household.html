@@ -96,12 +96,12 @@
                   class="whitespace-nowrap py-2 text-gray-900 rounded-lg text-xl"
                 >
                   <div class="flex justify-around">
-                    <div class="border">
+                    <div class="">
                       <a href="{% url 'patients:household_member' member.id %}">
                         <i class="fa-solid fa-eye text-site-yellow-2"></i>
                       </a>
                     </div>
-                    <div class="border">
+                    <div class="">
                       <a
                         href="{% url 'patients:hausehold_authentication' member.id %}"
                       >
@@ -138,7 +138,9 @@
           </div>
           <div class="flex border-t border-gray-200 py-2">
             <span class="text-gray-500">Icyiciro</span>
-            <span class="ml-auto text-gray-900">{{household.healthclass.Class}}</span>
+            <span class="ml-auto text-gray-900">
+              {{household.healthclass.Class}}
+            </span>
           </div>
           <div class="flex border-t border-gray-200 py-2">
             <span class="text-gray-500">Kwemeza kwivuza</span>
