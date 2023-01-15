@@ -203,7 +203,7 @@ def create_invoice(request,pk):
             messages.success(request, "Invoice Successfully Recorded")
             return redirect('patients:records')
         else:
-            messages.error(request, "Truing to add Medecine to the wrong patient, try again later")
+            messages.error(request, "Trying to add Medecine to the wrong patient, try again later")
             return redirect('patients:processing')
 
     context={"patient":patient,"invoiceForm":invoiceForm,"billForm":billForm}
