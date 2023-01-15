@@ -16,7 +16,7 @@ class Patriarch(models.Model):
     sex = models.CharField(max_length=1, choices=SEX)
     email=models.EmailField(null=True, blank=True)
     date=models.DateField(null=True, blank=True)
-    phone=models.CharField(null=True, blank=True,max_length=15)
+    phone=models.CharField(null=True, blank=True,max_length=10)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
         return self.firstName
@@ -33,7 +33,7 @@ class Family(models.Model):
     dob=models.DateField(null=True,blank=True)
     sex = models.CharField(max_length=1, choices=SEX)
     email=models.EmailField(null=True, blank=True)
-    phone=models.CharField(null=True, blank=True,max_length=15)
+    phone=models.CharField(null=True, blank=True,max_length=10)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
         return self.firstName+" "+ self.nationalId
