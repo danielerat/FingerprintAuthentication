@@ -105,7 +105,6 @@
               <p>Procedures Fees: {{p.bill.procedures_fee}}</p>
               <p>Medicine Fees: {{p.bill.medecines_fee}}</p>
               <p>Other Fees: {{p.bill.others_fee}}</p>
-              
             </td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-900">
               <p>
@@ -120,9 +119,7 @@
             <td class="whitespace-nowrap py-2 text-2xl rounded-lg">
               <div class="flex justify-around">
                 <div class="text-site-yellow-1">
-                  <a
-                    href="{% url 'patients:delete_recorded_patient' p.patient.id %}"
-                  >
+                  <a href="{% url 'patients:delete_recorded_patient' p.id %}">
                     <i class="fa-solid fa-circle-xmark"></i>
                   </a>
                 </div>

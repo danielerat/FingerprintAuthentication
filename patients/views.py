@@ -3,6 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 import pyrebase
 from django.utils import timezone
 
+from django.contrib.auth.decorators import login_required
+
+
 from datetime import datetime
 import pytz
 from django.http import HttpResponse
@@ -51,7 +54,7 @@ def index(request):
 def patients(request):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # context = {'latest_question_list': latest_question_list}
-    context={"name":"ilnuga gisa dnaiel"}
+    context={"name":"ilunga gisa dnaiel"}
     return HttpResponse('patients/patients.html')
 def patient(request,pk):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -60,6 +63,7 @@ def patient(request,pk):
     return HttpResponse('patients/patients.html')
 
 
+@login_required(login_url='users:login')
 def household_serach(request):
     
     if request.method == 'POST':
@@ -72,7 +76,8 @@ def household_serach(request):
             messages.error(request, "Unknown Id Card, Make sure you write well the ID")
             return render(request, 'patients/household_search.html')
     return render(request, 'patients/household_search.html')
-   
+
+@login_required(login_url='users:login')
 def household(request,pk):
     try:
         household = Patriarch.objects.get(id=pk)
@@ -87,6 +92,7 @@ def household(request,pk):
 
 
 
+@login_required(login_url='users:login')
 def household_member(request,pk):
     try:
         member = Family.objects.get(id=pk)
@@ -97,6 +103,7 @@ def household_member(request,pk):
     context={"member":member}
     return render(request,'patients/household_member.html',context)
 
+@login_required(login_url='users:login')
 def processing(request):
     healthFaculty=request.user.profile.health_faculty
     processing = Processing.objects.filter(healthFaculty=healthFaculty)
@@ -164,7 +171,7 @@ def deleteProcessingPatient(request, pk):
 
 def delete_recorded_patient(request, pk):
     try:
-        record = Invoice.objects.get(patient=pk)
+        record = Invoice.objects.get(id=pk)
         messages.info(request, "You are about to delete a patient")
 
     except:
