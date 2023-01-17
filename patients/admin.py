@@ -13,7 +13,7 @@ admin.site.register(HealthClass)
 
 @admin.register(Family)
 class FamilyAdmin(admin.ModelAdmin):
-    list_display=["chief","nationalId","firstName","lastName","dob","sex","email","phone"]
+    list_display=["id","chief","nationalId","firstName","lastName","dob","sex","email","phone"]
     search_fields = ['nationalId',"firstName","lastName","phone" ]
 
 @admin.register(Invoice)
